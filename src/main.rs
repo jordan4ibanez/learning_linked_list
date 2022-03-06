@@ -73,6 +73,7 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
                         let blah = next_reference.next.clone().unwrap().next;
                         next_reference.set_next(blah);
                         found = true;
+                        self.size -= 1;
                     }
                     count += 1;
                     next = &mut *next_reference.next;
@@ -118,6 +119,7 @@ fn main() {
         my_list.insert(i);
     }
     
+    my_list.remove(3);
     my_list.remove(3);
 
     my_list.raw_print();
