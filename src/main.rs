@@ -39,8 +39,29 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
 
     pub fn insert(&mut self, value: T) {
 
-        self.size += 1;
+        let mut found = false;
 
+        let mut next = &mut self.head;
+
+        while !found {
+            match next {
+                Some(next_reference) => {
+                    next = &mut *next_reference.next;
+                },
+                None => {
+                    *next = Some(Value::new(value));
+                    found = true;
+
+                    self.size += 1;
+                }
+            }
+        }
+    }
+
+    pub fn remove(&mut self, index: usize) {
+        let bridge: u32;
+
+        
         let mut found = false;
 
         let mut next = &mut self.head;
@@ -56,10 +77,6 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
                 }
             }
         }
-    }
-
-    pub fn remove(&mut self, index: usize) {
-
     }
 
     pub fn raw_print(&self) {
