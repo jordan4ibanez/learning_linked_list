@@ -58,7 +58,9 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
         }
     }
 
-    pub fn remove(&mut self, index: )
+    pub fn remove(&mut self, index: usize) {
+
+    }
 
     pub fn raw_print(&self) {
 
@@ -91,11 +93,9 @@ fn main() {
 
     let mut my_list: LinkedList<u32> = LinkedList::new();
 
-    my_list.insert(3);
-    my_list.insert(4);
-    my_list.insert(5);
-    my_list.insert(6);
-    my_list.insert(7);
+    for i in 0..6 {
+        my_list.insert(i);
+    }    
 
     my_list.raw_print();
 
