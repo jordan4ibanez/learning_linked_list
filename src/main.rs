@@ -86,7 +86,6 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
                 None => (),
             }
         }
-
     }
 
     pub fn raw_print(&self) {
@@ -114,6 +113,28 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
             }
         }
     }
+
+    pub fn get(&self, index: usize) -> Option<T> {
+
+        if index >= self.size {
+            return None;
+        }
+        
+        let mut next = &self.head;
+        let mut count = 0;
+        loop {
+            match next {
+                Some(next_reference) => {
+                    if count == index {
+                        return Some(next_reference.value);
+                    }
+                    count += 1;
+                    next = &*next_reference.next;
+                },
+                None => (),
+            }
+        }
+    }
 }
 
 fn main() {
@@ -121,12 +142,14 @@ fn main() {
     let mut my_list: LinkedList<u32> = LinkedList::new();
 
     for i in 0..6 {
-        my_list.insert(i);
+        my_list.insert(i * i);
     }
     
     my_list.remove(5);
 
     my_list.raw_print();
+
+    println!("The value at 2 is: {}", my_list.get(2).unwrap());
 
     println!("list size: {}", my_list.len());
 
