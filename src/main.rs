@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Clone)]
 struct Value<T> {
     pub value: T,
     pub next: Box<Option<Value<T>>>
@@ -10,6 +11,9 @@ impl <T: Copy + std::fmt::Debug> Value <T> {
             value,
             next: Box::new(None),
         }
+    }
+    pub fn set_next(&mut self, new_next: Box<Option<Value<T>>>){
+        self.next = new_next;
     }
 }
 
@@ -58,6 +62,27 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
         }
     }
 
+    pub fn remove(&mut self, index: usize) {
+        let mut found = false;
+        let mut next = &mut self.head;
+        let mut count = 0;
+        while !found {
+            match next {
+                Some(next_reference) => {
+                    if count == index - 1 {
+                        let blah = next_reference.next.clone().unwrap().next;
+                        next_reference.set_next(blah);
+                        found = true;
+                    }
+                    count += 1;
+                    next = &mut *next_reference.next;
+                },
+                None => (),
+            }
+        }
+
+    }
+
     pub fn raw_print(&self) {
 
         let mut found = false;
@@ -91,7 +116,9 @@ fn main() {
 
     for i in 0..6 {
         my_list.insert(i);
-    }    
+    }
+    
+    my_list.remove(3);
 
     my_list.raw_print();
 
