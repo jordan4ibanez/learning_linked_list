@@ -58,31 +58,6 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
         }
     }
 
-    pub fn remove(&mut self, index: usize) {
-
-        if index > self.size {
-            panic!("TRIED TO REMOVE ELEMENT {} FROM LIST SIZE OF {}! OUT OF BOUNDS!", index, self.size);
-        }
-
-        let bridge: u32;
-
-        let mut found = false;
-
-        let mut next = &mut self.head;
-
-        while !found {
-            match next {
-                Some(next_reference) => {
-                    next = &mut *next_reference.next;
-                },
-                None => {
-                    *next = Some(Value::new(value));
-                    found = true;
-                }
-            }
-        }
-    }
-
     pub fn raw_print(&self) {
 
         let mut found = false;
@@ -122,5 +97,4 @@ fn main() {
 
     println!("list size: {}", my_list.len());
 
-    
 }
