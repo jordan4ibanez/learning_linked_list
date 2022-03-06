@@ -63,6 +63,11 @@ impl <T: Copy + std::fmt::Debug + std::fmt::Display> LinkedList <T> {
     }
 
     pub fn remove(&mut self, index: usize) {
+
+        if index >= self.size {
+            return;
+        }
+
         let mut found = false;
         let mut next = &mut self.head;
         let mut count = 0;
@@ -119,8 +124,7 @@ fn main() {
         my_list.insert(i);
     }
     
-    my_list.remove(3);
-    my_list.remove(3);
+    my_list.remove(5);
 
     my_list.raw_print();
 
